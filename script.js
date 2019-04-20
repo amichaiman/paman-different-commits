@@ -2,8 +2,8 @@
 const speeds         = Object.freeze({"slow": 400, "medium":200, "fast":80});
 const boardPieces    = Object.freeze({"wall":0, "dot":1, "candy":2, "empty":3, "pacman":4});
 const directions     = Object.freeze({"left":0, "right":1, "up":2, "down":3, "same":4, "new":5});
-const dotScore       = 1;
-const candyScore     = 4;
+const dotScore       = 10;
+const candyScore     = 10;
 const dotColor       = "#ffaa00";
 const candyColor     = "#aaaaff";
 const pacmanSize     = 20;
@@ -301,6 +301,7 @@ function clearTile() {
     context.beginPath();
     context.rect(getTile(pacmanJ), getTile(pacmanI), tileSize, tileSize);
     context.fill();
+    $("#score").html(score);
 }
 
 function drawDot(i, j) {
@@ -474,10 +475,6 @@ function gameOver() {
 function move() {
     if (gameOver()) {
         return;
-    }
-
-    if (isOppositeDirection(nextDirection)) {
-        currentDirection = nextDirection;
     }
 
     if (canMove(nextDirection)) {
